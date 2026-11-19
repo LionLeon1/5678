@@ -1,0 +1,82 @@
+name: APK Definitivo F1
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  compilar:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: 1. Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 3. Descomprimir y preparar archivos
+        run: |
+          shopt -s nullglob
+          zips=(*.zip)
+          if [ ${#zips[@]} -gt 0 ]; then
+            unzip -o "${zips[0]}" -d .
+          fi
+
+          if [ -f "apex_life_f1.py" ]; then
+            cp apex_life_f1.py main.py
+          else
+            pys=(*.py)
+            if [ ${#pys[@]} -gt 0 ]; then
+              cp "${pys[0]}" main.py
+            else
+              echo "ERROR: No hay ningún archivo .zip ni .py en la raíz."
+              exit 1
+            fi
+          fi
+
+      - name: 4. Instalar Buildozer estable
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip install --upgrade pip buildozer==1.5.0 cython==0.29.33 virtualenv
+
+      - name: 5. Crear buildozer.spec (sin Python 3.14)
+        run: |
+          cat << 'EOF' > buildozer.spec
+          [app]
+          title = Apex Life F1
+          package.name = apexlifef1
+          package.domain = org.apexlife
+          source.dir = .
+          source.include_exts = py,png,jpg,kv,atlas,json
+          version = 2.0
+          requirements = python3,kivy==2.3.0
+          orientation = landscape
+          fullscreen = 1
+          android.permissions = INTERNET
+          android.api = 33
+          android.minapi = 21
+          android.ndk = 25b
+          android.archs = arm64-v8a
+          android.accept_sdk_license = True
+          p4a.branch = v2024.01.21
+
+          [buildozer]
+          log_level = 1
+          warn_on_root = 1
+          EOF
+
+      - name: 6. Compilar APK
+        run: |
+          set -o pipefail
+          yes | buildozer android debug > build.log 2>&1 || (tail -n 60 build.log && exit 1)
+
+      - name: 7. Subir APK descargable
+        uses: actions/upload-artifact@v4
+        with:
+          name: apex-life-f1-apk
+          path: bin/*.apk
