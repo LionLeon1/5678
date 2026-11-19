@@ -1,0 +1,73 @@
+{
+  "game_title": "Apex Life: F1 Open World",
+  "version": "1.0.0-prototype",
+  "driver_defaults": {
+    "name": "Piloto Novato",
+    "team": "Scuderia Nova",
+    "money": 250000,
+    "reputation": 50,
+    "fitness": 80,
+    "energy": 100,
+    "championship_points": 0,
+    "day": 1,
+    "location": "Apartamento en Mónaco",
+    "current_car": "F1-26 Prototype"
+  },
+  "locations": [
+    {
+      "id": "apartment",
+      "name": "Apartamento en Mónaco",
+      "type": "home",
+      "description": "Tu penthouse con vista al puerto. Descansa para recuperar energía.",
+      "action_label": "Dormir (+100 Energía, +1 Día)"
+    },
+    {
+      "id": "paddock",
+      "name": "Circuito de Mónaco (Paddock)",
+      "type": "race",
+      "description": "El corazón de la F1. Entrena en pista o corre el Gran Premio.",
+      "action_label": "Salir a Pista (Modo 3D)"
+    },
+    {
+      "id": "gym",
+      "name": "Centro de Alto Rendimiento",
+      "type": "training",
+      "description": "Entrena cuello y reflejos para soportar fuerzas G.",
+      "action_label": "Entrenar (-25 Energía, +10 Físico)"
+    },
+    {
+      "id": "casino",
+      "name": "Casino y Zona VIP",
+      "type": "social",
+      "description": "Eventos de gala, prensa y patrocinadores.",
+      "action_label": "Evento VIP (-20 Energía, +15 Reputación, +$50,000)"
+    },
+    {
+      "id": "dealership",
+      "name": "Concesionario de Superdeportivos",
+      "type": "shop",
+      "description": "Compra autos de calle para recorrer la ciudad.",
+      "action_label": "Comprar Supercar ($200,000, +25 Reputación)"
+    }
+  ],
+  "calendar": [
+    {
+      "round": 1,
+      "gp": "GP de Mónaco",
+      "laps": 5,
+      "prize": 150000
+    },
+    {
+      "round": 2,
+      "gp": "GP de Monza",
+      "laps": 5,
+      "prize": 180000
+    },
+    {
+      "round": 3,
+      "gp": "GP de Silverstone",
+      "laps": 5,
+      "prize": 200000
+    }
+  ]
+}

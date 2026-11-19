@@ -1,0 +1,49 @@
+{
+  "game_title": "Apex Life: F1 Open World v2.0",
+  "version": "2.0.0",
+  "driver_defaults": {
+    "name": "Piloto F1",
+    "team": "Scuderia Apex",
+    "money": 350000,
+    "reputation": 60,
+    "fitness": 85,
+    "energy": 100,
+    "championship_points": 0,
+    "day": 1,
+    "garage": [
+      "F1-26 Monoplaza"
+    ]
+  },
+  "locations": [
+    {
+      "id": "apartment",
+      "name": "Penthouse en Mónaco",
+      "type": "home",
+      "action_label": "Dormir (+100% Energía, +1 Día)"
+    },
+    {
+      "id": "paddock",
+      "name": "Circuito de Mónaco (Carrera 3D)",
+      "type": "race",
+      "action_label": "Salir a Pista 3D (con Rivales y DRS)"
+    },
+    {
+      "id": "gym",
+      "name": "Centro de Alto Rendimiento",
+      "type": "training",
+      "action_label": "Entrenar (-20 Energía, +10 Físico)"
+    },
+    {
+      "id": "casino",
+      "name": "Gala VIP y Patrocinadores",
+      "type": "social",
+      "action_label": "Evento VIP (-15 Energía, +$75,000, +15 Rep)"
+    },
+    {
+      "id": "dealership",
+      "name": "Concesionario de Superdeportivos",
+      "type": "shop",
+      "action_label": "Comprar Hypercar ($250,000, +30 Rep)"
+    }
+  ]
+}
